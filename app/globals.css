@@ -1,26 +1,225 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #1dc9d4;
+  --color-secondary: #ff6347;
+  --color-primary-100: #e0f7fa;
+  --color-black-100: #171717;
+  --color-black-200: #0a0a0a;
+  --color-white-100: #ededed;
+  --radius: 0.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Work Sans", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  .pattern {
+    background-image: linear-gradient(
+      to right,
+      transparent 49.5%,
+      rgba(251, 232, 67, 0.2) 49.5%,
+      rgba(251, 232, 67, 0.6) 50.5%,
+      transparent 50.5%
+    );
+    background-size: 5% 100%;
+    background-position: center;
+    background-repeat: repeat-x;
+  }
+
+  .tag-tri {
+    position: relative;
+  }
+
+  .tag-tri::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-top: 10px solid black;
+    border-right: 10px solid transparent;
+  }
+
+  .tag-tri::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    border-bottom: 10px solid black;
+    border-left: 10px solid transparent;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  /* =======================
+        TYPOGRAPHY
+  ======================= */
+  .text-30-extrabold {
+    @apply text-[30px] font-extrabold text-white;
+  }
+
+  .text-30-bold {
+    @apply text-[30px] font-bold text-black;
+  }
+
+  .text-30-semibold {
+    @apply font-semibold text-[30px] text-black;
+  }
+
+  .text-26-semibold {
+    @apply font-semibold text-[26px] text-black;
+  }
+
+  .text-24-black {
+    @apply text-[24px] font-black text-black;
+  }
+
+  .text-20-medium {
+    @apply font-medium text-[20px] text-black;
+  }
+
+  .text-16-medium {
+    @apply font-medium text-[16px] text-black;
+  }
+
+  .text-14-normal {
+    @apply font-normal text-sm text-white/80;
+  }
+
+  /* =======================
+         LAYOUT
+  ======================= */
+  .blue_container {
+    background-color: var(--color-primary);
+    @apply w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6;
+  }
+
+  .section_container {
+    @apply px-6 py-10 max-w-7xl mx-auto;
+  }
+
+  .card_grid {
+    @apply grid md:grid-cols-3 sm:grid-cols-2 gap-5;
+  }
+
+  .card_grid-sm {
+    @apply grid sm:grid-cols-2 gap-5;
+  }
+
+  /* =======================
+        COMPONENTS
+  ======================= */
+  .tag {
+    background-color: var(--color-secondary);
+    @apply px-6 py-3 font-sans font-bold rounded-sm uppercase relative;
+  }
+
+  .heading {
+    @apply uppercase bg-black px-6 py-3 font-sans font-extrabold text-white 
+        sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] 
+        max-w-5xl text-center my-5;
+  }
+
+  .sub-heading {
+    @apply font-medium text-[20px] text-white max-w-2xl text-center break-words;
+  }
+
+  .no-result {
+    @apply text-black-100 text-sm font-normal;
+  }
+
+  /* =======================
+        SEARCH FORM
+  ======================= */
+  .search-form {
+    @apply max-w-3xl w-full min-h-[80px] bg-white border-[5px] border-black 
+    rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
+  }
+
+  .search-input {
+    @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black w-full h-auto outline-none;
+  }
+
+  .search-btn {
+    @apply size-[50px] rounded-full bg-black flex justify-center items-center;
+  }
+
+  /* =======================
+       STARTUP CARD
+  ======================= */
+  .startup-card {
+    @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-lg 
+    hover:border-primary transition-all duration-500 hover:shadow-xl hover:bg-primary-100;
+  }
+
+  .startup-card_date {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full;
+  }
+
+  .startup-card_desc {
+    @apply font-normal text-[16px] line-clamp-2 my-3 text-black break-all;
+  }
+
+  .startup-card_img {
+    @apply w-full h-[164px] rounded-[10px] object-cover;
+  }
+
+  .startup-card_btn {
+    @apply rounded-full bg-black font-medium text-[16px] text-white px-5 py-3;
+  }
+
+  /* =======================
+         PROFILE CARD
+  ======================= */
+  .profile_container {
+    @apply w-full pb-10 pt-20 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10;
+  }
+
+  .profile_card {
+    @apply w-80 px-6 pb-6 pt-20 flex flex-col justify-center items-center bg-primary 
+    border-[5px] border-black shadow-lg rounded-[30px] relative z-0 h-fit max-lg:w-full;
+  }
+
+  .profile_title {
+    @apply w-11/12 bg-white border-[5px] border-black rounded-[20px] px-5 py-3 
+    absolute -top-9 after:absolute after:content-[''] after:-top-1 after:right-0 
+    after:-skew-y-6 after:bg-black after:-z-[1] after:rounded-[20px] after:w-full after:h-[60px] 
+    before:absolute before:content-[''] before:-bottom-1 before:left-0  
+    before:-skew-y-6 before:w-full before:h-[60px] before:bg-black  
+    before:-z-[1] before:rounded-[20px] shadow-lg;
+  }
+
+  .profile_image {
+    @apply rounded-full object-cover border-[3px] border-black;
+  }
+
+  /* =======================
+         FOOTER & VIEW
+  ======================= */
+  .view-container {
+    @apply flex justify-end items-center mt-5 fixed bottom-3 right-3;
+  }
+
+  .view-text {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize;
+  }
+
+  .category-tag {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full;
+  }
+}
+
+/* Suppression du padding par défaut du Markdown Editor */
+.w-md-editor-toolbar {
+  padding: 10px;
 }
