@@ -1,7 +1,6 @@
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
-
-@theme {
+/* @plugin "tailwindcss-animate"; */
+@import "tailwind" @theme {
   --color-primary: #1dc9d4;
   --color-secondary: #ff6347;
   --color-primary-100: #e0f7fa;
